@@ -1,4 +1,5 @@
-function(F)=frek(n,o)
-nota=['c','c1','d','e1','e','f','f1','g','g1','a','b1','b']
-i=findstr(nota,n);
-F=16,34*2^o*2^(i/12);
+function [F]=frek(n,o)%frekans döndürmektedir.
+nota={'do','c#','re','eb','mi','fa','f#','sol','g#','la','bb','si'}; %notolardan oluþan bir dizi yazdýk.
+n=strcmp(nota,n); %Dizenin içine aktarý,indekside 1 artýrýr.
+m=find(n,1);%n dizisinde 1 deðerinin indeksini döndürür.
+F=round(16.35*(2^o)*(2^((m-1)/12)));%frekans fonksiyonu oluþturuldu.
