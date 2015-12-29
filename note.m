@@ -1,20 +1,20 @@
-function [x,t] = note(f,vurus) %fonksiyonu tanimliyoruz.girilicek argumanlari tanýmladýk
-fs=8192;%örnekleme frekansý
-t = 0:1/fs:vurus; %0 dan dur a kadar 1/(100*ff) kadar artýyor
-%xx,tt]=note(1,3);
-%plot(tt,xx)
-%grafigi cizdirmek icin ustteki kodu command window'a yazariz
+function[x,t]=note(frekans,vurus)% genliði frekansý ve vuruþ deðeri verilen notanýn sinüs sinyalini çizdiren fonksiyon
+    fs=8192;
+    ds=fs/100;
+    t=0:1/fs:vurus-(1/fs);
+       a=length(t);
+    hk=[1 0.8 0.4 0.1];
+        b=length(hk);
+        x=zeros(1,a);
+        for i=1:b
+            x=x+(hk(i)*sin(2*pi*(i*frekans)*t));
+            
+        end
 
-    elemanS = length(tt); %% Eleman sayýsý
-    
-    attack = linspace(0,1.5,(elemanS*2/8));
-    
-    decay = linspace(1.5-(0.5/(elemanS/8)),1,(elemanS/8));
-    
-    sustain = ones(1,(elemanS/2));
-    
-    relase = linspace(1-(1/(elemanS/8)),0,(elemanS/8));
-    
-    zarf = [attack, decay, sustain, relase];
-
-    x = zarf .* sin(2*pi*f*t + zarf); %% zarflý sinüs
+   A=linspace(0,1.5,a/4);
+B=linspace(1.5,1,a/8);
+C=linspace(1,1,a/2);
+D=linspace(1,0,a/8);
+ zarf=[A B C D];
+ x=x.*zarf;
+ 
